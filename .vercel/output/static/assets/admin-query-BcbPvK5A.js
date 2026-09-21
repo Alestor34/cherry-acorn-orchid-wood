@@ -1,0 +1,1 @@
+import{n as e}from"./createServerFn-BQiW8dbD.js";import{o as t}from"./admin-DofZwRPn.js";function n(){return e({queryKey:[`admin-data`],queryFn:()=>t()})}export{n as t};

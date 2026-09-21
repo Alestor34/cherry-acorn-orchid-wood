@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="8" fill="#F6EFE4"/>
+  <!-- chunky fork: three tines, shoulder, handle -->
+  <rect x="8.5" y="4.5" width="4.2" height="12" rx="2.1" fill="#C45C26"/>
+  <rect x="13.9" y="4.5" width="4.2" height="12" rx="2.1" fill="#C45C26"/>
+  <rect x="19.3" y="4.5" width="4.2" height="12" rx="2.1" fill="#C45C26"/>
+  <rect x="8.5" y="13.6" width="15" height="5" rx="2.2" fill="#C45C26"/>
+  <rect x="13.9" y="16.5" width="4.2" height="11.5" rx="2.1" fill="#C45C26"/>
+  <!-- herb-olive leaf tucked against the handle -->
+  <path fill="#3F6B4F" d="M18.2 18.4c4.8-1.2 9.2 2.2 8.4 7.2-2.6-1.4-5.4-3.2-8.4-7.2z"/>
+</svg>
