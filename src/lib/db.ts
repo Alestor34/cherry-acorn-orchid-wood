@@ -5,7 +5,6 @@ export type DbSource = "neon" | "pglite";
 
 function resolveDatabaseUrl(): string | undefined {
   if (typeof process === "undefined") return undefined;
-  // Prefer explicit DATABASE_URL, then Netlify Database / Neon extension vars.
   const candidates = [
     process.env.DATABASE_URL,
     process.env.NETLIFY_DATABASE_URL,
@@ -16,39 +15,14 @@ function resolveDatabaseUrl(): string | undefined {
   for (const raw of candidates) {
     if (raw && raw.trim()) return raw.trim();
   }
-  // Optional: @netlify/database (provisioned automatically when the package is installed)
-  try {
-    // Dynamic require-style import may fail in non-Netlify builds — ignore.
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const mod = require("@netlify/database") as {
-      getConnectionString?: () => string;
-    };
-    if (typeof mod.getConnectionString === "function") {
-      const s = mod.getConnectionString();
-      if (s && s.trim()) return s.trim();
-    }
-  } catch {
-    // package not available or not in Netlify runtime
-  }
   return undefined;
 }
 
 const databaseUrl = resolveDatabaseUrl();
 
-/**
- * Active backend: real **Neon/Postgres** when a connection string is set,
- * otherwise a local embedded **PGLite** (Postgres compiled to WASM).
- */
+/** Real Postgres when a connection string is set, otherwise embedded PGLite. */
 export const dbSource: DbSource = databaseUrl ? "neon" : "pglite";
 
-/**
- * Minimal shared SQL surface, satisfied by both Neon and PGLite. Both the
- * tagged-template and `.query()` forms resolve to an array of row objects:
- *
- *   const sql = await getSql();
- *   const rows = await sql`select * from todos where id = ${id}`;
- *   const rows2 = await sql.query("select * from todos where id = $1", [id]);
- */
 export interface Sql {
   <T = Record<string, unknown>>(
     strings: TemplateStringsArray,
