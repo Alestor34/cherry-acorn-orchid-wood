@@ -1,8 +1,9 @@
 [build]
   command = "npm run build"
-  publish = "dist/client"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22"
 
-# Netlify will auto-detect Nitro functions when using the netlify preset
+# Nitro (preset: netlify) outputs public assets to dist/
+# and functions to .netlify/functions-internal/
